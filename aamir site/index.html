@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 40%, #f3e5f5 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating Elements - FULL SCREEN */
+        .floating-element {
+            position: fixed;
+            animation: float-down linear infinite;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 0;
+            will-change: transform;
+        }
+
+        @keyframes float-down {
+            0% {
+                transform: translateY(-150px) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            3% {
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: translateY(50vh) translateX(20px) rotate(180deg);
+                opacity: 0.7;
+            }
+
+            97% {
+                opacity: 0.4;
+            }
+
+            100% {
+                transform: translateY(calc(100vh + 150px)) translateX(-20px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Kisses */
+        .floating-kiss {
+            position: fixed;
+            font-size: 2.5rem;
+            animation: kiss-float 3s ease-out forwards;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        @keyframes kiss-float {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-200px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Card */
+        .card {
+            background: #fffef5;
+            border-radius: 25px;
+            padding: 40px 50px;
+            max-width: 650px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Window Dots */
+        .window-bar {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 15px;
+            justify-content: flex-start;
+        }
+
+        .window-dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .dot-pink {
+            background: #ff5f9e;
+        }
+
+        .dot-yellow {
+            background: #ffd93d;
+        }
+
+        .dot-green {
+            background: #6bcf7f;
+        }
+
+        /* Header */
+        .header-text {
+            color: #e91e63;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .hello-kitty-corner {
+            position: absolute;
+            top: 35px;
+            right: 40px;
+            font-size: 3rem;
+        }
+
+        /* Main Title */
+        h1 {
+            color: #e91e63;
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin: 15px 0;
+            line-height: 1.2;
+        }
+
+        .title-emojis {
+            display: inline-block;
+            font-size: 2.8rem;
+            margin-left: 10px;
+        }
+
+        /* Message */
+        .message {
+            color: #5a5a5a;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin: 25px 0;
+        }
+
+        .question {
+            color: #e91e63;
+            font-size: 1.15rem;
+            margin: 25px 0 20px;
+            font-weight: 600;
+        }
+
+        /* Cat Character */
+        .cat-character {
+            position: absolute;
+            bottom: 80px;
+            left: 35px;
+            font-size: 4rem;
+            animation: wiggle 2.5s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+
+            0%,
+            100% {
+                transform: rotate(-3deg);
+            }
+
+            50% {
+                transform: rotate(3deg);
+            }
+        }
+
+        /* Button */
+        .btn {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.35);
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .start {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.35);
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .btn.fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .start.fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 20, 147, 0.5);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.35);
+        }
+
+        .btn-green:hover {
+            box-shadow: 0 12px 35px rgba(34, 197, 94, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            color: #d81b60;
+            margin-top: 35px;
+            font-size: 0.95rem;
+        }
+
+        /* PAGE 2: Envelope */
+        .envelope-container {
+            perspective: 1000px;
+            cursor: pointer;
+            margin: 40px auto;
+        }
+
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: #ff69b4;
+            border-radius: 10px;
+            position: relative;
+            margin: 0 auto;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .envelope.flip {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-front,
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-radius: 10px;
+        }
+
+        .envelope-front {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+        }
+
+        .envelope-back {
+            background: #fff;
+            transform: rotateX(180deg);
+            padding: 20px;
+            font-size: 1rem;
+        }
+
+        .letter-content {
+            text-align: left;
+            color: #333;
+        }
+
+        .letter-title {
+            color: #e91e63;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .letter-para {
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+
+        /* Cake with Candle Fire Animation */
+        .cake-container {
+            position: relative;
+            display: inline-block;
+            font-size: 8rem;
+            margin: 30px 0;
+        }
+
+        .candle-fire {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            animation: flicker 0.3s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 15px rgba(255, 140, 0, 0.9));
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: translateX(-50%) scale(1) translateY(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.15) translateY(-3px);
+                opacity: 0.85;
+            }
+
+            100% {
+                transform: translateX(-50%) scale(0.92) translateY(3px);
+                opacity: 1;
+            }
+        }
+
+        .dance-container {
+            margin: 30px 0;
+        }
+
+        .dancing-char {
+            display: inline-block;
+            font-size: 5rem;
+            margin: 0 15px;
+            animation: dance 1s ease-in-out infinite;
+        }
+
+        .dancing-char:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .dancing-char:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes dance {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-5deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        /* PAGE 4: Wish Cards */
+        .wish-header {
+            color: #e91e63;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .wish-subtitle {
+            color: #999;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .wish-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .wish-card {
+            width: 170px;
+            height: 250px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .wish-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .wish-card.flipped .wish-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .wish-card-front,
+        .wish-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .wish-card-front {
+            background: white;
+        }
+
+        .wish-card-back {
+            background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+            color: white;
+            transform: rotateY(180deg);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .wish-card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .start-text {
+            color: #666;
+            font-size: 1rem;
+            margin: 20px 0;
+        }
+
+        /* PAGE 5: Letter */
+        .letter-cat {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 3.5rem;
+        }
+
+        .letter-header-small {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .letter-text {
+            text-align: left;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .letter-greeting {
+            color: #e91e63;
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .letter-body {
+            color: #333;
+            line-height: 1.7;
+            margin: 15px 0;
+        }
+
+        .letter-closing {
+            color: #4fc3f7;
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+
+        .letter-footer-text {
+            color: #999;
+            font-size: 0.9rem;
+            margin: 20px 0;
+        }
+
+        /* PAGE 6: Sealed Letter */
+        .seal-icon {
+            width: 80px;
+            height: 80px;
+            background: #ffc0cb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 20px auto;
+        }
+
+        .sealed-title {
+            color: #e91e63;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .sealed-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin: 15px 0;
+        }
+
+        .heart-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+            font-size: 1.5rem;
+            color: #ffb6c1;
+        }
+
+        .final-message {
+            color: #e91e63;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+
+        .date-text {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        /* Screen Management */
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 35px 25px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .btn {
+                font-size: 1.15rem;
+                padding: 14px 35px;
+            }
+
+            .wish-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- SCREEN 1: Happy Birthday Beautiful -->
+        <div class="card screen active" id="screen1">
+            <div class="window-bar">
+                <div class="window-dot dot-pink"></div>
+                <div class="window-dot dot-yellow"></div>
+                <div class="window-dot dot-green"></div>
+            </div>
+
+            <div class="header-text">Happy Birthday!</div>
+            <div class="hello-kitty-corner">🎀</div>
+
+            <h1>
+                Happy Birthday,<br>Beautiful!
+                <span class="title-emojis">🎂 ⭐</span>
+            </h1>
+
+            <p class="message">
+                Today is all about celebrating the most amazing person in my world.
+                I've created something magical just for you on your special day...
+            </p>
+
+            <p class="question">Ready for your birthday surprise?</p>
+
+            <div class="cat-character">🐱🎉</div>
+
+            <button class="btn fade-in" id="start" onclick="goToScreen(2)">Let's Gooo</button>
+            <button class="start fade-in">Play Song</button>
+
+            <p class="footer">Made with endless love for your special day 💕</p>
+        </div>
+
+        <!-- SCREEN 2: Letter Envelope -->
+        <div class="card screen" id="screen2">
+            <div class="window-bar">
+                <div class="window-dot dot-pink"></div>
+                <div class="window-dot dot-yellow"></div>
+                <div class="window-dot dot-green"></div>
+            </div>
+
+            <h1 style="color: #e91e63; margin-bottom: 20px;">A Special Letter 💌</h1>
+            <p class="message">Click the envelope to open your letter...</p>
+
+            <div class="envelope-container" onclick="openEnvelope()">
+                <div class="envelope" id="envelope">
+                    <div class="envelope-front">💌</div>
+                    <div class="envelope-back">
+                        <div class="letter-content">
+                            <div class="letter-title">My Lovely Gurl 💕</div>
+                            <div class="letter-para">
+                                You light up my world in ways I never thought possible.
+                                Every moment with you is a treasure, and today we celebrate YOU!
+                                Here's to making this birthday the most magical one yet!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn" id="continueBtn2" onclick="goToScreen(3)"
+                style="margin-top: 30px; display: none;">Continue It</button>
+        </div>
+
+        <!-- SCREEN 3: Dancing Characters -->
+        <div class="card screen" id="screen3">
+            <div class="window-bar">
+                <div class="window-dot dot-pink"></div>
+                <div class="window-dot dot-yellow"></div>
+                <div class="window-dot dot-green"></div>
+            </div>
+
+            <h1 style="color: #e91e63;">It's Cake Time! 🎂</h1>
+            <p class="message" style="margin-bottom: 30px;">Make your birthday wish come true!</p>
+
+            <div class="cake-container">
+                <div class="candle-fire">🔥</div>
+                🎂
+            </div>
+
+            <h2 style="color: #e91e63; font-size: 1.5rem; margin: 20px 0;">Time to Make a Wish! 🎊</h2>
+
+            <p class="message">Close your eyes and make your birthday wish 🎂</p>
+
+            <p style="color: #999; font-style: italic; margin: 15px 0;">Think of something wonderful for your new year!
+            </p>
+
+            <button class="btn fade-in" onclick="goToScreen(4)">I've Made My Wish!</button>
+        </div>
+
+        <!-- SCREEN 4: Birthday Wish Cards -->
+        <div class="card screen" id="screen4">
+            <div class="window-bar">
+                <div class="window-dot dot-pink"></div>
+                <div class="window-dot dot-yellow"></div>
+                <div class="window-dot dot-green"></div>
+            </div>
+
+            <div class="wish-header">Birthday Wishes Cards 🎁</div>
+            <div class="wish-subtitle">Click each card to reveal a birthday wish!</div>
+
+            <div class="wish-cards">
+                <div class="wish-card" onclick="flipCard(1)">
+                    <div class="wish-card-inner" id="card1-inner">
+                        <div class="wish-card-front">
+                            <img src="2149523772.jpg"
+                                alt="Couple" class="wish-card-image">
+                        </div>
+                        <div class="wish-card-back">
+                            <p><strong>Sweet Wishes! 💕</strong><br><br>May your everyday be filled with endless joy,
+                                laughter, and all the love you deserve!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wish-card" onclick="flipCard(2)">
+                    <div class="wish-card-inner" id="card2-inner">
+                        <div class="wish-card-front">
+                            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=400&h=500&fit=crop"
+                                alt="Couple" class="wish-card-image">
+                        </div>
+                        <div class="wish-card-back">
+                            <p><strong>My dear Arzoo! 💗</strong><br><br>You make my every day brighter. You don't need roses
+                                in your hairs to shine, Your soul blooms louder than flowers ever could!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wish-card" onclick="flipCard(3)">
+                    <div class="wish-card-inner" id="card3-inner">
+                        <div class="wish-card-front">
+                            <img src="pic3.jpg"
+                                alt="Couple" class="wish-card-image">
+                        </div>
+                        <div class="wish-card-back">
+                            <p><strong>Amazing Year Ahead! 🌟</strong><br><br>May up coming years bring you adventures, dreams
+                                come true, and memories to cherish forever!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="start-text">Start discovering your birthday surprises 🎉</p>
+
+            <button class="btn" id="continueBtn4" onclick="goToScreen(5)" style="display: none;">Continue to Birthday
+                Surprises</button>
+        </div>
+
+        <!-- SCREEN 5: Birthday Letter -->
+        <div class="card screen" id="screen5">
+            <div class="window-bar">
+                <div class="window-dot dot-pink"></div>
+                <div class="window-dot dot-yellow"></div>
+                <div class="window-dot dot-green"></div>
+            </div>
+
+            <h1 style="color: #e91e63; font-size: 1.8rem;">Final Birthday Letter</h1>
+            <p class="letter-header-small">A special message sealed with love 💕</p>
+
+            <div class="letter-cat">🐱💕</div>
+
+            <div
+                style="background: white; border-radius: 15px; padding: 30px; margin: 20px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <div style="color: #e91e63; font-weight: bold; margin-bottom: 20px;">💌 Final Birthday Love Letter</div>
+
+                <div class="letter-text">
+                    <div class="letter-greeting">My dearest Gurl Arzoo,</div>
+
+                    <div class="letter-body">
+                        Your eyes were a sunset I never planned to see, but standing there I forgot what I used to be.<br>
+
+                        The more You talk, the more beautiful You looks to me. If beauty had voice, It would sound like you.<br>
+
+                        Strangely, You became everything to me....<br>
+
+                        Not every princess live in castle high- <br>
+
+                        Some live in hearts like You live in mine
+                    </div>
+
+                    <div class="letter-closing">
+                        Happy Birthday, my love. You deserve the world and so much more. 🎂✨
+                    </div>
+                </div>
+
+                <p class="letter-footer-text">Sealing will complete your birthday experience.</p>
+
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn fade-in" onclick="goToScreen(6)">Seal The Letter 🎂</button>
+                    <button class="btn btn-green fade-in" onclick="goToScreen(1)">Experience Again</button>
+                </div>
+            </div>
+
+            <div style="position: absolute; bottom: 20px; left: 20px; font-size: 2rem;">💗</div>
+        </div>
+
+        <!-- SCREEN 6: Sealed Letter -->
+        <div class="card screen" id="screen6">
+            <div class="window-bar">
+                <div class="window-dot dot-pink"></div>
+                <div class="window-dot dot-yellow"></div>
+                <div class="window-dot dot-green"></div>
+            </div>
+
+            <h1 style="color: #e91e63; font-size: 1.8rem;">Final Birthday Letter</h1>
+            <p class="letter-header-small">A special message sealed with love 💕</p>
+
+            <div class="letter-cat">🐱💕</div>
+
+            <div class="seal-icon">💕</div>
+
+            <div class="sealed-title">Birthday Letter Sealed with Love</div>
+
+            <div class="sealed-subtitle">Happy Birthday, My Everything 🎉</div>
+
+            <div class="heart-row">
+                <span>💗</span>
+                <span>💗</span>
+                <span>💗</span>
+                <span>💗</span>
+                <span>💗</span>
+                <span>💗</span>
+                <span>💗</span>
+            </div>
+
+            <div class="final-message">Forever Yours, Happy Birthday! 💕 🎂</div>
+
+            <div class="date-text"> 17 Januray, Saturday</div>
+
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                <button class="btn fade-in" onclick="goToScreen(1)">Experience Birthday Magic Again ✨</button>
+                <button class="btn btn-green fade-in" onclick="sendKisses()">Send Birthday Kisses 💋</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+
+        // Floating elements - FIXED VERSION
+        const floatingEmojis = [
+            { emoji: '⭐', size: '2.5rem' },
+            { emoji: '⭐', size: '2rem' },
+            { emoji: '💗', size: '2rem' },
+            { emoji: '💕', size: '2.2rem' },
+            { emoji: '🌸', size: '2rem' },
+            { emoji: '☁️', size: '3rem' },
+            { emoji: '🎂', size: '2rem' },
+            { emoji: '🎀', size: '1.8rem' },
+            { emoji: '🪐', size: '1.8rem' },
+            { emoji: '💖', size: '2rem' }
+        ];
+
+        function createFloatingElement() {
+            const item = floatingEmojis[Math.floor(Math.random() * floatingEmojis.length)];
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.textContent = item.emoji;
+
+            // Random position across FULL WIDTH of screen
+            element.style.left = Math.random() * 100 + 'vw';
+            element.style.top = Math.random() * 100 + 'px';
+            element.style.fontSize = item.size;
+
+            // Random duration between 12-20 seconds for smooth fall across full height
+            const duration = Math.random() * 8 + 12;
+            element.style.animationDuration = duration + 's';
+
+            document.body.appendChild(element);
+
+            // Remove after animation completes
+            setTimeout(() => {
+                element.remove();
+            }, duration * 1000);
+        }
+
+        // Create more initial elements for full screen coverage
+        for (let i = 0; i < 15; i++) {
+            setTimeout(() => createFloatingElement(), i * 800);
+        }
+
+        // Keep creating new elements more frequently
+        setInterval(createFloatingElement, 2000);
+
+        // Screen navigation
+        function goToScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('screen' + screenNum).classList.add('active');
+
+            // Reset envelope when leaving screen 2
+            if (screenNum !== 2) {
+                document.getElementById('envelope')?.classList.remove('flip');
+                envelopeOpened = false;
+                const btn = document.getElementById('continueBtn2');
+                if (btn) {
+                    btn.style.display = 'none';
+                    btn.classList.remove('fade-in');
+                }
+            }
+
+            // Reset cards when leaving screen 4
+            if (screenNum !== 4) {
+                flippedCards.clear();
+                document.querySelectorAll('.wish-card').forEach(card => {
+                    card.classList.remove('flipped');
+                });
+                const btn = document.getElementById('continueBtn4');
+                if (btn) {
+                    btn.style.display = 'none';
+                    btn.classList.remove('fade-in');
+                }
+            }
+        }
+
+        // Envelope flip
+        let envelopeOpened = false;
+        function openEnvelope() {
+            if (!envelopeOpened) {
+                document.getElementById('envelope').classList.add('flip');
+                envelopeOpened = true;
+
+                // Show continue button after envelope opens
+                setTimeout(() => {
+                    const btn = document.getElementById('continueBtn2');
+                    btn.style.display = 'inline-block';
+                    btn.classList.add('fade-in');
+                }, 600);
+            }
+        }
+
+        // Wish card flip with counter
+        let flippedCards = new Set();
+
+        function flipCard(cardNum) {
+            const cardAudio = new Audio('sounds/card-flip.mp3');
+            cardAudio.play();
+
+            const card = document.querySelector(`.wish-card:nth-child(${cardNum})`);
+            const isAlreadyFlipped = card.classList.contains('flipped');
+
+            card.classList.toggle('flipped');
+
+            // Track flipped cards
+            if (!isAlreadyFlipped) {
+                flippedCards.add(cardNum);
+            }
+
+            // Check if all 3 cards are flipped
+            if (flippedCards.size === 3) {
+                setTimeout(() => {
+                    const btn = document.getElementById('continueBtn4');
+                    btn.style.display = 'inline-block';
+                    btn.classList.add('fade-in');
+                }, 500);
+            }
+        }
+
+        // Send kisses animation
+        function sendKisses() {
+            const kissesAudio = new Audio('sounds/kisses.mp3');
+            kissesAudio.play();
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const kiss = document.createElement('div');
+                    kiss.className = 'floating-kiss';
+                    kiss.textContent = '💋';
+                    kiss.style.left = Math.random() * 80 + '%';
+                    kiss.style.top = Math.random() * 50 + '%';
+                    kiss.style.bottom = '0';
+                    kiss.style.animationDelay = Math.random() * 0.5 + 's';
+                    document.body.appendChild(kiss);
+
+                    setTimeout(() => kiss.remove(), 3000);
+                }, i * 150);
+            }
+        }
+
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', buttonSound);
+        });
+
+        function buttonSound() {
+            const audio = new Audio('sounds/pop.mp3');
+            audio.play();
+        }
+
+        const start = document.querySelector('.start');
+        let play = false;
+        const bd = new Audio('sounds/bdSong.mp3');
+        bd.loop = true;
+
+        start.addEventListener('click', () => {
+            if (!play) {
+                bd.play();
+                start.innerText = "Pause Song";
+                play = true;
+            } else {
+                bd.pause();
+                start.innerText = "Play Song";
+                play = false;
+            }
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
